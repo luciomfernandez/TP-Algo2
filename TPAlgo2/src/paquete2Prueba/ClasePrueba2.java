@@ -6,4 +6,9 @@ public class ClasePrueba2 {
 		System.out.println("Prueba2");
 	}
 
+
+	public void nada() {
+		
+	}
+
 }
