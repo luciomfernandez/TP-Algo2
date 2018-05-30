@@ -12,6 +12,7 @@ public class ClasePrueba2 {
 
 	public void nada() {
 		int i=1;
+	
 	}
 
 }
