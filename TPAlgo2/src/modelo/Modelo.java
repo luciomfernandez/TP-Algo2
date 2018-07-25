@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import excepciones.MiException;
+import fabrica.ConceptoProducto;
+import fabrica.MateriaPrima;
+import fabrica.Producto;
+import fabrica.Registro;
+import fabrica.ReglaConstruccion;
+import fabrica.UnidadMedida;
 import maquina.Maquina;
-import tpFabrica.ConceptoProducto;
-import tpFabrica.MateriaPrima;
-import tpFabrica.Producto;
-import tpFabrica.Registro;
-import tpFabrica.ReglaConstruccion;
 import vistas.MiVistaUsuarioConsola;
 import vistas.NombreCant;
 import vistas.VistaUsuario;
@@ -36,7 +37,7 @@ public class Modelo {
 	
 	
 	//*******************************************/ALTA PRODUCTO/*****************************************
-	public void altaProducto(String nombre,String unidadMedida) {
+	public void altaProducto(String nombre,UnidadMedida unidadMedida) {
 		try {
 			validador.validarAltaProducto(nombre);	
 			 Producto pm=new Producto(nombre,unidadMedida);
@@ -60,7 +61,7 @@ public class Modelo {
 	}
 
 	//****************************************/ALTA MATERIA PRIMA//***********************************
-	public void altaMateriaPrima(String nombre, String unidadMedida) {
+	public void altaMateriaPrima(String nombre, UnidadMedida unidadMedida) {
 		try {
 			this.validador.validarAltaMateriaPrima(nombre);
 			MateriaPrima mp=new MateriaPrima(nombre,unidadMedida);
@@ -155,7 +156,16 @@ public class Modelo {
 	
 //*********************************/REGISTRO VENTA/*********************************************
 	public void registrarVenta(String nombreProducto, Integer cantidad){
-		
+		try {
+			this.validador.validarVenta(nombreProducto, cantidad);
+			this.buscarConceptoProductoPorNombre(nombreProducto).decrementarStock(cantidad);
+			String unidadMedida=this.buscarConceptoProductoPorNombre(nombreProducto).getUnidadMedida();
+			this.registro.registrarVenta(nombreProducto, cantidad, unidadMedida);
+			this.vista.onActualizaRegistro(this.generarRegistroActual());
+			this.vista.onActualizaStock(this.generarStockActual());
+		} catch (MiException e) {
+			this.vista.onVentaProducto(e.getMessage());
+		}
 	}
 	
 //*********************************/REGISTRO COMPRA MATERIA PRIMA/*******************************	

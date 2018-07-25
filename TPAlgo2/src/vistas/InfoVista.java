@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import excepciones.MiException;
+import fabrica.UnidadMedida;
 
 public class InfoVista{
 	private ArrayList<String> productosManufacturados;
@@ -12,6 +13,10 @@ public class InfoVista{
 	private InfoProductoReglas infoProductoReglas;
 	private InfoStock infoStock;
 	private InfoVentaCompraFab infoRegistro;
+	private InfoUnidadMedida infoUnidades;
+	
+	
+	
 	
 	
 	
@@ -198,6 +203,25 @@ public class InfoVista{
 		return menu;
 	}
 
+	
+	public String unidadesMedida(String mensaje) {
+		if(this.infoUnidades==null) {
+			this.infoUnidades=new InfoUnidadMedida();
+		}
+		
+		String menu=mensaje+"\n";
+		for(int i=0;i<this.infoUnidades.getUnidadesMedida().length;i++){
+			menu=menu+(i+1)+":"+this.infoUnidades.getUnidadesMedida()[i].getDescripcion()+"\n";
+		}
+		
+		return menu;
+	}
+	
+	
+	public UnidadMedida getUnidadPos(Integer pos) {
+		return this.infoUnidades.getPos(pos);
+	}
+	
 	
 	
 	public String registro(String mensaje)throws MiException{

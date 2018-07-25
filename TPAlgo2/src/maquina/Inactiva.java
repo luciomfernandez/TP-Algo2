@@ -3,8 +3,8 @@ package maquina;
 import java.util.ArrayList;
 
 import excepciones.MiException;
-import tpFabrica.ConceptoProducto;
-import tpFabrica.ReglaConstruccion;
+import fabrica.ConceptoProducto;
+import fabrica.ReglaConstruccion;
 
 public class Inactiva implements EstadoMaquina {
 	

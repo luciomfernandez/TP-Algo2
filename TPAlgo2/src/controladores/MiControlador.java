@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.ArrayList;
 
+import fabrica.UnidadMedida;
 import modelo.Modelo;
 import vistas.NombreCant;
 
@@ -13,12 +14,12 @@ public class MiControlador implements Controlador {
 		this.modelo=modelo;
 	}
 	
-	public void peticionAltaMP(String nombre ,String unidadMedida) {
+	public void peticionAltaMP(String nombre ,UnidadMedida unidadMedida) {
 		modelo.altaMateriaPrima(nombre,unidadMedida);
 	
 	}
 	
-	public void peticionAltaP(String nombre,String unidadMedida) {
+	public void peticionAltaP(String nombre,UnidadMedida unidadMedida) {
 		modelo.altaProducto(nombre,unidadMedida);
 	}
 	
@@ -43,5 +44,10 @@ public class MiControlador implements Controlador {
 	public void peticionComprarMateriPrima(String materiaPrima,Integer cantidad) {
 		modelo.registrarCompra(materiaPrima, cantidad);
 	}
-
+	
+	public void peticionVentaProducto(String nombreProducto, Integer cantidad) {
+		modelo.registrarVenta(nombreProducto, cantidad);
+	}
+	
+	
 }

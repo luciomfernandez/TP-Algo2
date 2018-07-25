@@ -9,6 +9,7 @@ import javax.swing.SingleSelectionModel;
 
 import controladores.Controlador;
 import excepciones.MiException;
+import fabrica.UnidadMedida;
 
 
 public class MiVistaUsuarioConsola implements VistaUsuario {
@@ -21,6 +22,7 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 	
 	public MiVistaUsuarioConsola(){
 		scanner=new Scanner(System.in);
+		this.infoVista=new InfoVista();
 	}
 	
 	
@@ -88,6 +90,11 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 					}
 					break;
 				case 8:
+					try {
+						this.ventaProducto();
+					}catch(MiException e) {
+						this.mostrarMensaje(e.getMessage());
+					}
 					break;
 				case 9:
 					try {
@@ -133,27 +140,12 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 	
 	public void altaMateriaPrima(){
 		String nombre=null;
-		String unidadMedida=null;
-		Integer op;
+		UnidadMedida unidadMedida=null;
+		Integer opcion;
+		String menu=this.infoVista.unidadesMedida(Mensaje.SELECCIONE_UNIDAD.getMensaje());
 		nombre=this.pedirStringConsola(Mensaje.NOMBRE_MATERIA_PRIMA.getMensaje());
-		op=this.pedirIntegerConsola(Mensaje.SELECCIONE_UNIDAD.getMensaje());
-		switch(op) {
-			case 1:
-				unidadMedida=Mensaje.KILOS.getMensaje();
-				break;
-			case 2:
-				unidadMedida=Mensaje.GRAMOS.getMensaje();
-				break;
-			case 3:	
-				unidadMedida=Mensaje.LITROS.getMensaje();
-				break;
-			case 4:
-				unidadMedida=Mensaje.MILILITROS.getMensaje();
-				break;
-			case 5:
-				unidadMedida=Mensaje.UNIDADES.getMensaje();
-				break;
-		}
+		opcion=this.pedirIntegerConsola(menu);
+		unidadMedida=this.infoVista.getUnidadPos(opcion-1);		
 		
 		this.peticionAltaMateriaPrima(nombre,unidadMedida);
 	}
@@ -161,32 +153,15 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 	
 	public void altaProducto(){
 		String nombre=null;
-		String unidadMedida=null;
-		Integer op;
+		UnidadMedida unidadMedida=null;
+		Integer opcion;
+		String menu=this.infoVista.unidadesMedida(Mensaje.SELECCIONE_UNIDAD.getMensaje());
 		nombre=this.pedirStringConsola(Mensaje.NOMBRE_PRODUCTO.getMensaje());
-		op=this.pedirIntegerConsola(Mensaje.SELECCIONE_UNIDAD.getMensaje());
-	
-		switch(op) {
-		case 1:
-			unidadMedida=Mensaje.KILOS.getMensaje();
-			break;
-		case 2:
-			unidadMedida=Mensaje.GRAMOS.getMensaje();
-			break;
-		case 3:	
-			unidadMedida=Mensaje.LITROS.getMensaje();
-			break;
-		case 4:
-			unidadMedida=Mensaje.MILILITROS.getMensaje();
-			break;
-		case 5:
-			unidadMedida=Mensaje.UNIDADES.getMensaje();
-			break;
-	}
-		
-		
+		opcion=this.pedirIntegerConsola(menu);
+		unidadMedida=this.infoVista.getUnidadPos(opcion-1);
+
+				
 		this.peticionAltaProducto(nombre, unidadMedida);
-	
 	
 	}
 	
@@ -312,6 +287,19 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 		
 	}
 	
+	public void ventaProducto() throws MiException{
+		Integer opcion;
+		String nombre;
+		Integer cantidad;
+		String menu=this.infoVista.productosManufacturados(Mensaje.VENTA_SELECT.getMensaje());
+		opcion=this.pedirIntegerConsola(menu);
+		nombre=this.infoVista.getProductoPos(opcion-1);
+		cantidad=this.pedirIntegerConsola(Mensaje.VENTA_CANTIDAD.getMensaje());
+		
+		this.peticionVenta(nombre,cantidad);
+	}
+	
+	
 	
 	public void stock()throws MiException {
 		String menu=this.infoVista.stock(Mensaje.STOCK_ACTUAL.getMensaje());
@@ -333,6 +321,9 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 		this.mostrarMensajeLimpiando(menu);
 		Integer opcion=this.pedirIntegerConsolaSinLimpiar("1:Volver al menú");
 	}
+	
+	
+	
 	
 	//PROPIA
 	public String pedirStringConsola(String mensaje) {
@@ -385,7 +376,7 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 	}
 //******************************************a**	/*ALTA MATERIA PRIMA*/ ******************************************************
 	//SOBREESCRIBRE DE INTERFAZ
-	public void peticionAltaMateriaPrima(String nombre, String unidadMedida){
+	public void peticionAltaMateriaPrima(String nombre, UnidadMedida unidadMedida){
 		this.controlador.peticionAltaMP(nombre, unidadMedida);
 	}
 
@@ -402,7 +393,7 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 
 	//********************************************	/*ALTA PRODUCTO*/ ******************************************************	
 	//SOBREESCRIBE DE INTERFAZ
-	public void peticionAltaProducto(String nombre,String unidadMedida){
+	public void peticionAltaProducto(String nombre,UnidadMedida unidadMedida){
 		this.controlador.peticionAltaP(nombre,unidadMedida);
 	}
 	
@@ -485,6 +476,21 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 		this.controlador.peticionComprarMateriPrima(nombre, cantidad);
 	}
 	
+	
+	//**************************************/PETICION VENTA/*********************************************
+	
+	public void peticionVenta(String nombreProducto,Integer cantidad) {
+		this.controlador.peticionVentaProducto(nombreProducto, cantidad);
+	}
+	
+	
+	public void onVentaProducto(String err) {
+		if(err!=null) {
+			this.mostrarMensaje(err);
+		}else {
+			this.mostrarMensaje(Mensaje.VENTA_OK.getMensaje());
+		}
+	}
 	//**************************************/ACTUALIZA STOCK/************************************************
 	public void onActualizaStock(ArrayList<String> stockActualizado){
 		this.infoVista.actualizarStockVista(stockActualizado);
@@ -497,7 +503,7 @@ public class MiVistaUsuarioConsola implements VistaUsuario {
 	
 	//SOBREESCRIBE DE INTERFAZ
 	public void initVista() {
-		this.infoVista=new InfoVista();
+		
 		this.mostrarMenu();
 			
 	}

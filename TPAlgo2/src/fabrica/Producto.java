@@ -1,4 +1,4 @@
-package tpFabrica;
+package fabrica;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ public class Producto extends ConceptoProducto{
 	
 	private ArrayList<ReglaConstruccion> reglasConstruccion;
 	
-	public Producto(String nombre, String unidadMedida) {
+	public Producto(String nombre, UnidadMedida unidadMedida) {
 		super(nombre,unidadMedida);	
 	}
 

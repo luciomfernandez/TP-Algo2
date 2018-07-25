@@ -36,18 +36,7 @@ public enum Mensaje {
 	
 	PEDIR_CANT_REGLA("Ingrese el numero de elementos que tendrá la regla"),
 	
-	SELECCIONE_UNIDAD("Seleccione unidad de medida:\n"
-			+ "1-Kilos\n"
-			+ "2-Gramos\n"
-			+ "3-Litros\n"
-			+ "4-Mililitros\n"
-			+ "5-Unidades\n"
-			),
-	KILOS("Kilos"),
-	GRAMOS("Gramos"),
-	LITROS("Litros"),
-	MILILITROS("Mililitros"),
-	UNIDADES("Unidades"),
+	SELECCIONE_UNIDAD("Seleccione unidad de medida:\n"),
 	
 	
 	STOCK_ACTUAL("Stock actual:\n"),
@@ -59,6 +48,10 @@ public enum Mensaje {
 	
 	NOMBRE_UNIDAD_MEDIDA("Ingrese unidad de medida"),
 	
+	//VENTA
+	VENTA_SELECT("Seleccione producto a vender"),
+	VENTA_OK("Venta OK..."),
+	VENTA_CANTIDAD("Ingrese cantidad a vender"),
 	
 	//MAQUINAS
 	MENU_MAQUINA_1("Seleccione producto al que asociará la nueva maquina"),

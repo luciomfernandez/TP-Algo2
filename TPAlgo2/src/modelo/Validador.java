@@ -15,7 +15,7 @@ public class Validador {
 	
 	//VALIDA ALTA MAQUINA
 	public void validarAltaMaquina() throws MiException{
-		
+	
 	}
 	
 	//VALIDA VENTA

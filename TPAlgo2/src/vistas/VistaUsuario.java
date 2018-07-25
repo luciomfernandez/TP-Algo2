@@ -31,4 +31,7 @@ public interface VistaUsuario {
 	//END FABRICACION
 	public void onEndFabricacion(String nombreMaquina, String err);
 
+	//VENTA PRODUCTO
+	public void onVentaProducto(String err);
+	
 }

@@ -2,14 +2,14 @@ package maquina;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import CriterioPerdida.CriterioPerdida;
 import excepciones.MiException;
-import tpFabrica.AlgoritmoPerdida;
-import tpFabrica.ConceptoProducto;
-import tpFabrica.Producto;
-import tpFabrica.ReglaConstruccion;
+import fabrica.ConceptoProducto;
+import fabrica.Producto;
+import fabrica.ReglaConstruccion;
 
 public class Maquina {
-	private AlgoritmoPerdida algoritmo;
+	private CriterioPerdida algoritmo;
 	private ReglaConstruccion regla;
 	private String nombre;
 	private Producto productoAsociado;

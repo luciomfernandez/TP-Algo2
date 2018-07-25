@@ -1,13 +1,14 @@
-package tpFabrica;
+package fabrica;
 
 public class ConceptoProducto {
 	
 	private String idUnico;
 	private String nombre;
-	private String unidadMedida;
 	private Integer stock;
-		
-	public ConceptoProducto(String nombre, String unidadMedida) {
+	private UnidadMedida unidadMedida;
+	
+	
+	public ConceptoProducto(String nombre, UnidadMedida unidadMedida ) {
 		super();
 		this.nombre = nombre;
 		this.unidadMedida = unidadMedida;
@@ -34,9 +35,9 @@ public class ConceptoProducto {
 		this.nombre = nombre;
 	}
 	public String getUnidadMedida() {
-		return unidadMedida;
+		return this.unidadMedida.getDescripcion();
 	}
-	public void setUnidadMedida(String unidadMedida) {
+	public void setUnidadMedida(UnidadMedida unidadMedida) {
 		this.unidadMedida = unidadMedida;
 	}
 	public Integer getStock() {

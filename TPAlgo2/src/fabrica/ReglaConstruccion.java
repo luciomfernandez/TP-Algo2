@@ -1,4 +1,5 @@
-package tpFabrica;
+
+package fabrica;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -18,6 +19,11 @@ public class ReglaConstruccion {
 		this.nombre=nombre;
 	}
 	
+	public ReglaConstruccion() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public void agProdCant(ConceptoProducto producto,Integer cantidad) {
 		if(this.regla==null){
 			this.regla=new HashMap<ConceptoProducto,Integer>();
