@@ -59,9 +59,12 @@ public enum Mensaje {
 	
 	MAQUINA_OK("Maquina dada de alta correctamente"),
 	MENU_MAQUINA_PERDIDAS("Seleccione el tipo de perdidá que tendrá la máquina:\n"
-				+ "1:TIPO 1\n"
-				+ "2:TIPO 2\n"
-				+ "3:TIPO 3 "),
+				+ "1:Sin perdida 1\n"
+				+ "2:Pérdida total\n"
+				+ "3:Pérdida una unidad\n"
+				+ "4:Pérdida de líquidos\n"
+				+ "5:Pérdida de gramos\n"
+				+ "6:Pérdida del 50% en todos los elementos "),
 	//FABRICACION
 	FABRICACION_SELECT("Seleccione maquina con la que desea fabricar\n"),
 	FABRICACION_SELECT_END("Seleccione maquina a finalizar\n"),

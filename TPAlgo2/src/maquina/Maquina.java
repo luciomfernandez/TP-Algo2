@@ -3,13 +3,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import CriterioPerdida.CriterioPerdida;
+import CriterioPerdida.Perdida50PorCiento;
+import CriterioPerdida.PerdidaDeLiquidos;
+import CriterioPerdida.PerdidaPorGramos;
+import CriterioPerdida.PerdidaTotal;
+import CriterioPerdida.PerdidaUnaUnidad;
+import CriterioPerdida.SinPerdida;
 import excepciones.MiException;
 import fabrica.ConceptoProducto;
 import fabrica.Producto;
 import fabrica.ReglaConstruccion;
 
 public class Maquina {
-	private CriterioPerdida algoritmo;
+	private CriterioPerdida criterio;
 	private ReglaConstruccion regla;
 	private String nombre;
 	private Producto productoAsociado;
@@ -40,13 +46,32 @@ public class Maquina {
 	}
 	
 	
-	public void setPerdida(Integer tipoAlg) {
-		
+	public void setPerdida(Integer tipoCriterio) {
+		switch(tipoCriterio) {
+			case 1:
+				this.criterio=new SinPerdida();
+				break;
+			case 2:
+				this.criterio=new PerdidaTotal();
+				break;
+			case 3:
+				this.criterio=new PerdidaUnaUnidad();
+				break;
+			case 4:
+				this.criterio=new PerdidaDeLiquidos();
+				break;
+			case 5:
+				this.criterio=new PerdidaPorGramos();
+				break;
+			case 6:
+				this.criterio=new Perdida50PorCiento();
+				break;
+			default:
+				break;
+		}
 	}
 	
-	public Boolean tienePerdida() {
-		return this.algoritmo!=null;
-	}
+	
 	
 	public Boolean tieneReglaAsociada() {
 		return this.regla!=null;
@@ -74,5 +99,8 @@ public class Maquina {
 		return this.productoAsociado;
 	}
 	
+	public CriterioPerdida getCriterioPerdida() {
+		return this.criterio;
+	}
 	
 }

@@ -15,12 +15,26 @@ public class Perdida50PorCiento implements CriterioPerdida {
 			Integer cantidad;
 			Double porcentaje;
 			
+			
+			
+			//VERIFICA SI CUMPLE PERDIDA
 			for(int i=0;i<conceptos.size();i++){
 				cpAux=conceptos.get(i);
 				cantidad=regla.getCantidad(cpAux);
 				porcentaje = (50.0 / 100) * cantidad.doubleValue();
 				cumplePerdida=cumplePerdida && (cpAux.getStock()>=cantidad+(porcentaje.intValue()));
 	
+			}
+			
+			
+			//SI CUMPLE PERDIDA ACTUALIZO EL STOCK
+			if(cumplePerdida){
+				for(int i=0;i<conceptos.size();i++){
+				cpAux=conceptos.get(i);
+				cantidad=regla.getCantidad(cpAux);
+				porcentaje = (50.0 / 100) * cantidad.doubleValue();
+				cpAux.decrementarStock(cantidad+(porcentaje.intValue()));
+				}
 			}
 			
 			return cumplePerdida;

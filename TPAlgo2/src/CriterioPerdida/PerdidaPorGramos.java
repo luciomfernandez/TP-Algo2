@@ -24,6 +24,21 @@ public class PerdidaPorGramos implements CriterioPerdida {
 			}
 		}
 		
+		
+		//SI CUMPLE PERDIDA ACTUALIZO EL STOCK
+				if(cumplePerdida) {
+					for(int i=0;i<conceptos.size();i++){
+						cpAux=conceptos.get(i);
+						cantidad=regla.getCantidad(cpAux);
+						if(cpAux.getUnidadMedida().equals("Gramos")) {
+							cpAux.decrementarStock(cantidad*2);
+						}else {
+							cpAux.decrementarStock(cantidad*2);
+						}
+					}
+				}
+		
+		
 		return cumplePerdida;
 	}	
 }

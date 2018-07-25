@@ -27,6 +27,22 @@ public class PerdidaDeLiquidos implements CriterioPerdida {
 			}
 		}
 		
+		
+		//SI CUMPLE PERDIDA ACTUALIZO EL STOCK
+		if(cumplePerdida){
+			for(int i=0;i<conceptos.size();i++){
+				cpAux=conceptos.get(i);
+				cantidad=regla.getCantidad(cpAux);
+				if(cpAux.getUnidadMedida().equals("Litros")) {
+					porcentaje = (10.0 / 100) * cantidad.doubleValue();
+					cpAux.decrementarStock(cantidad+(porcentaje.intValue()));
+				}else{
+					cpAux.decrementarStock(cantidad);
+				}		
+			}
+		}
+		
+		
 		return cumplePerdida;
 	}
 

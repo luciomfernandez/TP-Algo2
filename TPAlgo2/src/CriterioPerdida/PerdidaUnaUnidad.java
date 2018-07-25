@@ -24,6 +24,22 @@ public class PerdidaUnaUnidad implements CriterioPerdida {
 			}
 		}
 		
+		
+		
+		//Si cumple perdida actualizo el stock
+		if(cumplePerdida) {	
+			for(int i=0;i<conceptos.size();i++){
+				cpAux=conceptos.get(i);
+				cantidad=regla.getCantidad(cpAux);
+				if(cpAux.getUnidadMedida().equals("Unidades")) {
+					cpAux.decrementarStock(cantidad+1);
+				}else {
+					cpAux.decrementarStock(cantidad);
+				}
+			}
+		}
+		
+		
 		return cumplePerdida;
 	}
 
